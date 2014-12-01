@@ -1,0 +1,6 @@
+# view AndroidManifest.xml #generated:6
+-keep class com.opposite0302.bingo.CordovaApp { <init>(...); }
+
+# view AndroidManifest.xml #generated:12
+-keep class org.pgsqlite.SQLitePlugin { <init>(...); }
+
