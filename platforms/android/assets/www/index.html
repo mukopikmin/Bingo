@@ -42,19 +42,21 @@
             
             $(function() {
                 $("#reset").click(function() {
-                    var db = window.sqlitePlugin.openDatabase({name: "bingo"});
-                    db.transaction(function(tx) {
-                        tx.executeSql('DROP TABLE IF EXISTS bingo;');
-                        tx.executeSql('CREATE TABLE IF NOT EXISTS bingo (id integer primary key, appear integer not null)');
-                        for(var i = 1; i < 76; i++) {
-                            tx.executeSql("INSERT INTO bingo (id, appear) VALUES (?, ?)", [i, 0], function(tx, res) {
-                                console.log("");
-                            }, function(e) {
-                                console.log("ERROR: " + e.message);
-                            });
-                        }
-                    });
-                    alert("ビンゴデータがリセットされました");
+                    if(window.confirm('本当にいいんですね？')){
+                        var db = window.sqlitePlugin.openDatabase({name: "bingo"});
+                        db.transaction(function(tx) {
+                            tx.executeSql('DROP TABLE IF EXISTS bingo;');
+                            tx.executeSql('CREATE TABLE IF NOT EXISTS bingo (id integer primary key, appear integer not null)');
+                            for(var i = 1; i < 76; i++) {
+                                tx.executeSql("INSERT INTO bingo (id, appear) VALUES (?, ?)", [i, 0], function(tx, res) {
+                                    console.log("");
+                                }, function(e) {
+                                    console.log("ERROR: " + e.message);
+                                });
+                            }
+                        });
+                        alert("ビンゴデータがリセットされました");
+                    }
                 });
                 
                 $("#slot").click(function() {
