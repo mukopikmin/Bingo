@@ -42,17 +42,20 @@
                     var rewardNames = [];
                     db.transaction(function(tx) {
                         tx.executeSql("SELECT * FROM reward WHERE lost = ?;", [0], function(tx, res) {
-                            for(var i = 0; i < res.rows.length; i++) {
-                                rewardIds.splice(0, 0, res.rows.item(i).id);
-                                rewardNames.splice(0, 0, res.rows.item(i).name);
+                            alert(res.rows.length);
+                            if(res.rows.length > 0) {
+                                for(var i = 0; i < res.rows.length; i++) {
+                                    rewardIds.splice(0, 0, res.rows.item(i).id);
+                                    rewardNames.splice(0, 0, res.rows.item(i).name);
+                                }
+                                var selectedId = Math.floor(Math.random() * res.rows.length);
+                                $("#message").text(rewardNames[selectedId]);
+                                db.transaction(function(tx) {
+                                    tx.executeSql("UPDATE reward SET lost = ? WHERE id = ?", [1, selectedId]);
+                                });
+                            } else {
+                                alert("景品がなくなりました");
                             }
-                            var selectedId = Math.floor(Math.random() * res.rows.length);
-                            alert(selectedId);
-                            alert(rewardNames[selectedId]);
-                            $("#message").text(rewardNames[selectedId]);
-                            db.transaction(function(tx) {
-                                tx.executeSql("UPDATE reward SET lost = ? WHERE id = ?", [1, selectedId]);
-                            });
                         });
                     });
                 });
