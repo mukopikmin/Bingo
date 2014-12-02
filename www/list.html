@@ -25,51 +25,31 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <title>Hello World</title>
+        <style type="text/css">
+            body {
+                text-align: center;
+                font-size: 5em;
+            }
+            .appeared {
+                background-color: red;
+            }
+        </style>
         <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
         <script type="text/javascript">
-            $(function() {
-                alert("D");
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
                 var db = window.sqlitePlugin.openDatabase({name: "bingo"});
-                alert("A");
                 db.transaction(function(tx) {
-                    alert("B");
                     tx.executeSql("SELECT * FROM bingo WHERE appear = ?;", [1], function(tx, res) {
-                        alert("C");
-                        alert(res.rows.length);
                         for(var i = 0; i < res.rows.length; i++) {
-                            alert("#n" + res.rows.item(i).id);
-                            $("#n" + res.rows.item(i).id).text("!!" + res.rows.item(i).id);
+                            $("#n" + res.rows.item(i).id).addClass("appeared");
                         }
                     });
                 });
-                
-                $("#reset").click(function() {
-                    //var db = window.sqlitePlugin.openDatabase({name: "bingo"});
-                    db.transaction(function(tx) {
-                        tx.executeSql("DROP TABLE IF EXISTS bingo;", [], function(tx, res) {
-                            for(var i = 1; i < 76; i++) {
-                                tx.executeSql("INSERT INTO bingo (id, appear) VALUES (?, ?)", [i, 0], function(tx, res) {
-                                    console.log("insertId: " + res.insertId + " -- probably 1");
-                                    console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
-                                    db.transaction(function(tx) {
-                                        tx.executeSql("select count(id) as cnt from bingo;", [], function(tx, res) {
-                                            console.log("res.rows.length: " + res.rows.length + " -- should be 1");
-                                            console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
-                                        });
-                                    });
-                                }, function(e) {
-                                    console.log("ERROR: " + e.message);
-                                });
-                            }
-                            alert("BINGO data has reseted!");
-                        });
-                    });
-                });
-            });
+            }
         </script>
     </head>
     <body>
-        <a id="reset" href="index.html">リセット</a>
         <table>
             <thead>
                 <tr>
