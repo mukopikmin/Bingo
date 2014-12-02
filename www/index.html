@@ -55,6 +55,20 @@
                                 });
                             }
                         });
+                        db.transaction(function(tx) {
+                            tx.executeSql('DROP TABLE IF EXISTS reward;');
+                            tx.executeSql('CREATE TABLE IF NOT EXISTS reward (id integer primary key, name text not null, lost integer not null)');
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["温泉チケット", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["オムロン体組成計 カラダスキャン", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["シリコンスチーマー パスタセット", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["ボディソープセット ピンクグレープフルーツ", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["メリーチョコレート ボヌール", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["今治謹製 フェイスウォッシュタオル", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["クローバー 六本木ケーキ", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["ミニクリーナー", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["図書券", 0]);
+                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["図書券", 0]);
+                        });
                         alert("ビンゴデータがリセットされました");
                     }
                 });
@@ -97,8 +111,9 @@
     <body>
         <h1>BINGO GAME</h1>
         <div id="number">0</div>
-        <a id="slot" href="#">次の数字</a>
+        <a href="#" id="slot">次の数字</a>
         <a href="list.html">出た数字</a>
+        <a href="reward.html" id="reward"></a>
         <a href="#" id="reset">リセット</a>
         
         <script type="text/javascript" src="cordova.js"></script>
