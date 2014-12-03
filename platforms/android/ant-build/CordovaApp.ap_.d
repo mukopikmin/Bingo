@@ -39,6 +39,7 @@ C:\Users\Yusuke\Desktop\Bingo\platforms\android\assets\www\list.html \
 C:\Users\Yusuke\Desktop\Bingo\platforms\android\assets\www\plugins \
 C:\Users\Yusuke\Desktop\Bingo\platforms\android\assets\www\reward.html \
 C:\Users\Yusuke\Desktop\Bingo\platforms\android\assets\www\css\index.css \
+C:\Users\Yusuke\Desktop\Bingo\platforms\android\assets\www\css\pure-min.css \
 C:\Users\Yusuke\Desktop\Bingo\platforms\android\assets\www\img\logo.png \
 C:\Users\Yusuke\Desktop\Bingo\platforms\android\assets\www\js\index.js \
 C:\Users\Yusuke\Desktop\Bingo\platforms\android\assets\www\js\jquery-2.1.1.min.js \

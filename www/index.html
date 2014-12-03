@@ -24,13 +24,18 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <title>Hello World</title>
+        <title>Bingo</title>
+        <link rel="stylesheet" href="css/pure-min.css" />
         <style type="text/css">
             body {
                 text-align: center;
+                margin: 5%;
             }
             #number {
                 font-size: 20em;
+            }
+            .button-error {
+                background: rgb(202, 60, 60); /* this is a maroon */
             }
         </style>
         <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
@@ -99,13 +104,17 @@
         </script>
     </head>
     <body>
-        <h1>BINGO GAME</h1>
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <a href="#" class="pure-menu-heading">BINGO GAME</a>
+            <ul>
+                <li class="pure-menu-selected"><a href="list.html">出た数字</a></li>
+                <li class="pure-menu-selected"><a href="reward.html">景品選び</a></li>
+                <li id="reset"class="pure-menu-selected"><a href="#">景品選び</a></li>
+            </ul>
+        </div>
+        
         <div id="number">0</div>
-        <a href="#" id="slot">次の数字</a>
-        <a href="list.html">出た数字</a>
-        <a href="reward.html" id="reward"></a>
-        <a href="#" id="reset">リセット</a>
-        <a href="reward.html">景品</a>
+        <a href="#" id="slot" class="pure-button pure-button-primary">次の数字</a>
         
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
