@@ -29,14 +29,20 @@
         <style type="text/css">
             body {
                 text-align: center;
-                font-size: 1em;
                 margin: 5%;
+                background-image: url("img/background.jpg");
+            }
+            td {
+                background-color: tranparent;
             }
             table {
                 width: 100%;
             }
             thead {
-                background-color: blue;
+                background-color: white;
+            }
+            #appeared-numbers {
+                font-size: 150%;
             }
             .appeared {
                 background-color: red;
@@ -58,7 +64,15 @@
         </script>
     </head>
     <body>
-        <table class="pure-table">
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <a href="index.html" class="pure-menu-heading">BINGO GAME</a>
+            <ul>
+                <li class="pure-menu-selected"><a href="list.html">出た数字</a></li>
+                <li class="pure-menu-selected"><a href="reward.html">景品選び</a></li>
+            </ul>
+        </div>
+        <br />
+        <table id="appeared-numbers">
             <thead>
                 <tr>
                     <td><b>B</b></td>
@@ -70,7 +84,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td id="n1">1</td>
+                    <td class="appeared" id="n1">1</td>
                     <td id="n16">16</td>
                     <td id="n31">31</td>
                     <td id="n46">46</td>
