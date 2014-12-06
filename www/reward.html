@@ -32,6 +32,9 @@
                 background-image: url("img/background.jpg");
                 margin: 5%;
             }
+            table {
+                width: 100%;
+            }
             #message {
                 font-size: 200%;
                 background-color: white;
@@ -46,7 +49,7 @@
                 db.transaction(function(tx) {
                     tx.executeSql("SELECT * FROM reward WHERE lost = ?;", [1], function(tx, res) {
                         for(var i = 0; i < res.rows.length; i++) {
-                            $("#rewards").append("<tr class="pure-table-odd"><td>" + res.rows.item(i).name + "</td></tr>");
+                            $("#rewards").append("<tr class='pure-table-odd'><td>" + res.rows.item(i).name + "</td></tr>");
                         }
                     });
                 });
@@ -69,6 +72,7 @@
                                 db.transaction(function(tx) {
                                     tx.executeSql("UPDATE reward SET lost = ? WHERE id = ?;", [1, rewardIds[selectedId]]);
                                 });
+                                $("#rewards").append("<tr class='pure-table-odd'><td>" + res.rows.item(i).name + "</td></tr>");
                             } else {
                                 alert("景品がなくなりました");
                             }
@@ -89,7 +93,8 @@
         <br />
         <a href="#" id="reward" class="pure-button pure-button-primary">景品の抽選をする</a>
         <br />
-        <div id="message"><b>_________________</b></div>
+        <br />
+        <div id="message"><b>　</b></div>
         <br />
         <table id="rewards" class="pure-table">
             <th>受け渡し済み景品リスト</th>
