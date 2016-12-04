@@ -8,6 +8,10 @@ table {
   font-size: 150%;
 }
 
+.table th, .table td {
+     border-top: none !important;
+ }
+
 .appeared {
   background-color: red;
 }
