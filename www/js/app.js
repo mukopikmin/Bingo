@@ -31,6 +31,9 @@ $(function() {
           tx.executeSql("INSERT INTO bingo (id, appear) VALUES (?, ?)", [i, 0]);
         }
       });
+          for (var i = 1; i <= 75; i++) {
+            $("#n" + i).removeClass("appeared");
+          }
       alert("ビンゴデータがリセットされました");
     }
   });
