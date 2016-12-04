@@ -1,0 +1,9 @@
+body {
+  text-align: center;
+  margin: 5%;
+  background-image: url("../img/background.jpg");
+}
+
+.btn-group {
+  margin-bottom: 10px;
+}

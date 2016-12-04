@@ -1,0 +1,21 @@
+{
+  "name": "cordova-bingo",
+  "authors": [
+    "Yusuke Mukai <opposite0302@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^2.2.4"
+  }
+}

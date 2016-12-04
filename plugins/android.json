@@ -4,32 +4,14 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {
-            "AndroidManifest.xml": {
-                "parents": {
-                    "/manifest/application": [
-                        {
-                            "xml": "<activity android:label=\"@string/app_name\" android:name=\"org.pgsqlite.SQLitePlugin\"><intent-filter></intent-filter></activity>",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "res/xml/config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"org.pgsqlite.SQLitePlugin\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
-            }
-        }
+        "files": {}
     },
     "installed_plugins": {
-        "com.phonegap.plugins.sqlite": {
-            "PACKAGE_NAME": "com.opposite0302.bingo"
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "io.cordova.mukopikmin.bingo"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.cordova.mukopikmin.bingo"
         }
     },
     "dependent_plugins": {}

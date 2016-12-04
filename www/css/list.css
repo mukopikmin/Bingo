@@ -1,0 +1,13 @@
+body {
+  text-align: center;
+  margin: 5%;
+  background-image: url("../img/background.jpg");
+}
+
+table {
+  font-size: 150%;
+}
+
+.appeared {
+  background-color: red;
+}

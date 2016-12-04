@@ -1,129 +1,33 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <title>Bingo</title>
-        <link rel="stylesheet" href="css/pure-min.css" />
-        <style type="text/css">
-            body {
-                text-align: center;
-                margin: 5%;
-                background-image: url("img/background.jpg");
-            }
-            #number {
-                font-size: 3000%;
-            }
-            .button-error {
-                background: rgb(202, 60, 60); /* this is a maroon */
-            }
-        </style>
-        <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">            
-            document.addEventListener("deviceready", onDeviceReady, false);
-            function onDeviceReady() {
-                var db = window.sqlitePlugin.openDatabase({name: "bingo"});
-                db.transaction(function(tx) {
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS bingo (id integer primary key, appear integer not null)');
-                    for(var i = 1; i < 76; i++) {
-                        tx.executeSql("INSERT INTO bingo (id, appear) VALUES (?, ?)", [i, 0]);
-                    }
-                });
-            }
-            
-            $(function() {
-                $("#reset").click(function() {
-                    if(window.confirm('本当にいいんですね？')) {
-                        var db = window.sqlitePlugin.openDatabase({name: "bingo"});
-                        db.transaction(function(tx) {
-                            tx.executeSql('DROP TABLE IF EXISTS bingo;');
-                            tx.executeSql('CREATE TABLE IF NOT EXISTS bingo (id integer primary key, appear integer not null)');
-                            for(var i = 1; i < 76; i++) {
-                                tx.executeSql("INSERT INTO bingo (id, appear) VALUES (?, ?)", [i, 0]);
-                            }
-                        });
-                        db.transaction(function(tx) {
-                            tx.executeSql('DROP TABLE IF EXISTS reward;');
-                            tx.executeSql('CREATE TABLE IF NOT EXISTS reward (id integer primary key, name text not null, lost integer not null)');
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["温泉チケット", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["オムロン体組成計 カラダスキャン", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["シリコンスチーマー パスタセット", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["ボディソープセット ピンクグレープフルーツ", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["メリーチョコレート ボヌール", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["今治謹製 フェイスウォッシュタオル", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["クローバー 六本木ケーキ", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["ミニクリーナー", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["図書券", 0]);
-                            tx.executeSql("INSERT INTO reward (name, lost) VALUES (?, ?)", ["図書券", 0]);
-                        });
-                        alert("ビンゴデータがリセットされました");
-                    }
-                });
-                
-                $("#slot").click(function() {
-                    var db = window.sqlitePlugin.openDatabase({name: "bingo"});
-                    var number = 0;
-                    var appearedNumbers = [];
-                    db.transaction(function(tx) {
-                        tx.executeSql("SELECT * FROM bingo WHERE appear = ?;", [1], function(tx, res) {
-                            if(res.rows.length != 75) {
-                                for(var i = 0; i < res.rows.length; i++) {
-                                    appearedNumbers.splice(0, 0, res.rows.item(i).id);
-                                }
-                                while(true) {
-                                    number = Math.floor(Math.random() * 75 + 1);
-                                    if(appearedNumbers.indexOf(number) == -1) {
-                                        break;
-                                    }
-                                }
-                                $("#number").text(number);
-                                db.transaction(function(tx) {
-                                    tx.executeSql("UPDATE bingo SET appear = ? WHERE id = ?", [1, number]);
-                                });
-                            } else {
-                                alert("数字が全てそろいました");
-                            }
-                        });
-                    });
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <div class="pure-menu pure-menu-open pure-menu-horizontal">
-            <a href="index.html" class="pure-menu-heading">BINGO GAME</a>
-            <ul>
-                <li class="pure-menu-selected"><a href="list.html">出た数字</a></li>
-                <li class="pure-menu-selected"><a href="reward.html">景品選び</a></li>
-                <li id="reset"><a href="#">リセット</a></li>
-            </ul>
-        </div>
-        
-        <div id="number">0</div>
-        <a href="#" id="slot" class="pure-button pure-button-primary">次の数字</a>
-        
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+
+<head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/app.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+  <div class="app">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button id="list" class="btn btn-default">出た数字</button>
+      <button id="top" class="btn btn-default">スロット</button>
+      <button id="reset" class="btn btn-default">リセット</button>
+    </div>
+
+    <div id="number">0</div>
+
+    <button id="slot" class="btn btn-primary">次の数字</button>
+  </div>
+
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+
 </html>
