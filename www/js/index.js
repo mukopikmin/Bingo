@@ -1,3 +1,5 @@
+$("#top").prop("disabled", true);
+
 $(function() {
   $("#slot").click(function() {
     var db = window.openDatabase("bingo", "1.0", "Bingo DB", 200000);
